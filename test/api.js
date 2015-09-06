@@ -10,7 +10,11 @@ suite('API Calls', function() {
   });
 
   test('Normalize', function(done) {
-    api.normalize('jquery').then(function(normalized) {
+    return api.install('jquery', '2.1.4')
+    .then(function() {
+      return api.normalize('jquery');
+    })
+    .then(function(normalized) {
       assert(normalized === System.baseURL + 'jspm_packages/github/components/jquery@2.1.4/jquery.js');
       done();
     })
